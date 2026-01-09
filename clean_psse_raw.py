@@ -34,7 +34,8 @@ def is_branch_line(line):
     line = line.strip()
     
     # Skip empty lines and comment lines
-    if not line or line.startswith('0 /') or line.startswith('/'):
+    # End-of-section markers typically look like "0 /" or "  0  /"
+    if not line or re.match(r'^\s*0\s*/', line) or line.startswith('/'):
         return False, None, None
     
     # Try to parse the first two comma-separated values as integers
@@ -99,7 +100,7 @@ def clean_raw_file(input_path, output_path):
     total_lines = 0
     removed_lines_info = []
     
-    with open(input_path, 'r', encoding='utf-8', errors='ignore') as infile:
+    with open(input_path, 'r', encoding='utf-8', errors='replace') as infile:
         with open(output_path, 'w', encoding='utf-8') as outfile:
             for line_num, line in enumerate(infile, 1):
                 total_lines += 1
