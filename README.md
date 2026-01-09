@@ -81,6 +81,8 @@ The cleaned file will have the invalid branch lines removed while preserving all
 - ✅ Detects and removes invalid branch definitions (same from-bus and to-bus)
 - ✅ Preserves all other file content
 - ✅ Handles large files with multiple invalid entries
+- ✅ Robust parsing with regex-based section marker detection
+- ✅ Handles whitespace variations in branch definitions and section markers
 - ✅ Provides detailed reporting of removed lines
 - ✅ Configurable input/output file paths
 - ✅ Automatic output file naming
@@ -96,9 +98,11 @@ The cleaned file will have the invalid branch lines removed while preserving all
 Test files are included in the repository:
 - `test_sample.raw` - Contains invalid branch definitions for testing
 - `test_clean.raw` - A clean file with no invalid branches
+- `test_edge_cases.raw` - Tests edge cases with various whitespace patterns
 
 Run the script on the test files to verify functionality:
 ```bash
 python clean_psse_raw.py test_sample.raw
 python clean_psse_raw.py test_clean.raw
+python clean_psse_raw.py test_edge_cases.raw
 ```
